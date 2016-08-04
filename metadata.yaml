@@ -1,0 +1,31 @@
+_repo: The-Paths-of-Inland-Commerce--A-Chronicle-of-Trail-Road-and-Waterway_3098
+_version: 0.0.1
+creator:
+  author:
+    agent_name: Hulbert, Archer Butler
+    birthdate: 1873
+    deathdate: 1933
+    gutenberg_agent_id: '1112'
+    url: http://www.gutenberg.org/2009/agents/1112
+description: A survey of American development as it is bound up with the history of
+  transportation. Covers the early methods such as wagoner, pack-horseman, riverman
+  and canal boatman, thru the perfection of the steamboat and the beginnings of the
+  modern railroads.
+gutenberg_bookshelf:
+- Children's History
+- United States
+gutenberg_issued: '2002-02-01'
+gutenberg_type: Text
+identifiers:
+  gutenberg: '3098'
+language: en
+publisher: Project Gutenberg
+rights: Public domain in the USA.
+rights_url: http://creativecommons.org/about/pdm
+subjects:
+- !lcc 'HE'
+- !lcc 'E151'
+- !lcsh 'Transportation -- United States -- History'
+- GITenberg
+title: The Paths of Inland Commerce; A Chronicle of Trail, Road, and Waterway
+url: http://www.gutenberg.org/ebooks/3098
