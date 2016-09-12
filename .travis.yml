@@ -1,0 +1,61 @@
+sudo: required
+dist: trusty
+language: ruby
+
+before_install:
+before_install:
+- gem install asciidoctor -v 1.5.2
+- gem install tilt
+- sudo pip install git+https://github.com/gitenberg-dev/gitberg
+- sudo pip install pillow
+- sudo pip install cssutils
+- sudo pip install docutils
+- sudo pip install roman
+- sudo pip install git+https://github.com/gitenberg-dev/pg-epubmaker
+script:
+- VERSION=`ruby -e "require 'yaml'; meta = YAML.load_file('metadata.yaml'); puts meta['_version'];"`
+- git clone https://github.com/gitenberg-dev/asciidoctor-htmlbook.git
+- sudo pip install -r asciidoctor-htmlbook/gitberg-machine/requirements.txt
+
+- /usr/bin/python -c "from gitenberg import travis; travis.build_epub()"
+- ebook-convert book.epub book.mobi
+- xvfb-run ebook-convert book.epub book.pdf
+branches:
+  only:
+  - master
+notifications:
+  webhooks:
+    urls:
+      - https://unglue.it/api/travisci/webhook
+    on_success: always
+    on_failure: never
+    on_start: never
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: vWZsC3AkHeKi1ce/G7SqskxSlfxGAwkir5lneyMlzm+tuerZlitX370WNnw57aXJ++yaDEXeO1BVJ+uDoiOOU5s2yB+99NugbNiHZ8obIzSRpmfuyWoGv89HiOUcSYm3dIJh2Lxx34DAcJzfUFTpc/GO+QfRK5buAL8KRPhapv5Y6oVEwv6EtLmEEUCPrjPuNmY4DlP/No9PUjTMsLQiIgyGg72r7J85UCjiZ8dLST7nkLlCIwgmnxhVffzBIo3LXVTbHFWOv6i0c/0Kmv3l13/n5IXd5KQ5OhBnomIMqhle6TN9g6a2+FRNjchOhlME7pSa2WJ6PBnE+5qE/jHriyO92iXsgUkL8yoYpZWiO9RT3Cl/djMmlXHycMfr6vjLpAqz6KsOhfZBFZ9ziI/wdIHfGjAs1KKIejyfliOjtsJCv9P4nzjlkuCzKo4I28jYMQ96mMyHMgNEC20nJe2aQGZEdasjHOZjfuF5L2BdNoF0bd5sjieMK+z0TiUZHyHH9eysaMiUQNj5cmwrlcKN4RmYeh1s8qMUryVuvRBES95VyRELGVE7gNcdHHCFjDoVkBOtjSGAAsP3/jLkoqtzpht8f+X8wYwDe6cFlOwvb/QtEYNhVMv3nI5QkL8TFMCbQh0tHUIJFNwmsProom49EZ2br4b35mL5tcd/J1gagxs=
+  file:
+    - book.epub
+    - book.mobi
+    - book.pdf
+  "on":
+    repo: GITenberg/The-Paths-of-Inland-Commerce--A-Chronicle-of-Trail-Road-and-Waterway_3098
+addons:
+  apt:
+    packages:
+    - xsltproc
+    - xvfb
+    - calibre
+    - python-pip
+    - git
+    - python-dev
+    - libjpeg-dev
+    - libpng-dev
+    - libfreetype6
+    - libfreetype6-dev
+    - zlib1g-dev
+    - python-lxml
+    - libxml2-dev
+    - libxslt1-dev
+    - tidy
